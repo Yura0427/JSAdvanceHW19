@@ -1,0 +1,44 @@
+<form>
+
+  <div class="form-group">
+    <label for="productName">productName</label>
+    <input [(ngModel)]="productName" name="productName" type="text" class="form-control" id="productName">
+  </div>
+  <div class="form-group">
+    <label for="productDescription">productDescription</label>
+    <input [(ngModel)]="productDescription" name="productDescription" type="text" class="form-control"
+      id="productDescription">
+  </div>
+  <div class="form-group">
+    <label for="productPrice">productPrice</label>
+    <input [(ngModel)]="productPrice" name="productPrice" type="number" class="form-control" id="productPrice">
+  </div>
+  <button type="button" class="btn btn-success" (click)="addProduct()">ADD</button>
+</form>
+<hr>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let p of adminProducts; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{p.name}}</td>
+          <td>{{p.description}}</td>
+          <td>{{p.price}}</td>
+          <td>
+              <input (click)="editProduct(p)" type="button" value="Edit" class="btn btn-warning">
+          </td>
+          <td>
+            <input (click)="deleteProduct(p)" type="button" value="delete" class="btn btn-danger">
+        </td>
+      </tr>
+  </tbody>
+</table>

@@ -1,0 +1,53 @@
+<nav class="navbar navbar-light bg-light">
+  <p>Category</p>
+  <button type="button" class="btn btn-dark btn-bg" (click)="openModal(template)">Add</button>
+</nav>
+
+<input class="form-control my-2" type="search" placeholder="Category filter" [(ngModel)]="searchVal" name="searchVal"
+  (input)="search()">
+<table class="table">
+  <th>
+    <tr class="row">
+      <th class="col-1">#</th>
+      <th class="col-7">Name</th>
+      <th class="col-2">Edit</th>
+      <th class="col-2">Delete</th>
+    </tr>
+  </th>
+  <tbody>
+    <tr class="row" *ngFor=" let c of searchCategory; let i=index">
+      <td class="col-1">{{i+1}}</td>
+      <td class="col-7">{{c.categoryName}}</td>
+      <td class="col-2">
+        <input type="button" (click)="editCategory(c, template)" value="Edit" class="btn btn-warning">
+      </td>
+      <td class="col-2">
+        <input type="button" (click)="deleteCategory(c, template1)" value="Delete" class="btn btn-danger">
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal title</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <input type="text" (input)="categoryVal()" [(ngModel)]="nameCategoryVal" name="nameCategoryVal" class="form-control"
+      placeholder="Name category">
+    <input type="button" class="btn btn-primary  " (click)="modalRef.hide()" value="close">
+    <input type="button" *ngIf="!editStatus" (click)="addCategory()" class="btn btn-primary m-2" value="Add" [disabled]="!addStatus">
+    <input type="button" *ngIf="editStatus" (click)="addCategory()" class="btn btn-primary m-2" value="Save edit" [disabled]="!addStatus">
+  </div>
+</ng-template>
+
+<ng-template #template1>
+  <div class="modal-body">
+    <input type="button" (click)="modalRef.hide()" class="btn btn-primary m-3 col-5" value="Cancel">
+    <input type="button" (click)="acceptDel()" class="btn btn-danger m-3  col-5" value="Delete">
+  </div>
+</ng-template>
